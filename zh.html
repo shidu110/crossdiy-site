@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roger Yan — 模具设计 · NX 曲面 · 逆向工程 | CrossDIY</title>
+<meta name="description" content="Roger Yan：模具设计与 Siemens NX 曲面工程师。NX 产品与模具设计、扫描数据逆向工程、产品开发。">
+<link rel="alternate" hreflang="en" href="https://me.crossdiy.com/">
+<link rel="alternate" hreflang="zh-CN" href="https://me.crossdiy.com/zh">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0e10;
+    --ink-2:#121316;
+    --paper:#ece7dd;
+    --paper-dim:rgba(236,231,221,.62);
+    --paper-faint:rgba(236,231,221,.38);
+    --line:rgba(236,231,221,.14);
+    --accent:#d29a4a;
+    --accent-soft:rgba(210,154,74,.16);
+    --serif:"Fraunces","Noto Serif SC",serif;
+    --sans:"Inter",-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--accent);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+  /* ---------- nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);background:rgba(13,14,16,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.14em}
+  .brand em{font-style:normal;color:var(--accent)}
+  .nav-links{display:flex;gap:34px;font-size:13px;letter-spacing:.18em;color:var(--paper-dim)}
+  .nav-links a{position:relative;padding:4px 0;transition:color .25s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  @media(max-width:640px){.nav-links{gap:18px;font-size:12px}}
+
+  /* ---------- hero ---------- */
+  header{position:relative;padding:190px 0 110px;overflow:hidden}
+  .contours{position:absolute;inset:0;pointer-events:none;opacity:.5}
+  .contours svg{width:100%;height:100%}
+  .hero-kicker{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.34em;color:var(--accent);text-transform:uppercase;margin-bottom:34px}
+  .hero-kicker::before{content:"";width:44px;height:1px;background:var(--accent)}
+  h1{font-family:var(--serif);font-weight:900;font-size:clamp(52px,9.2vw,118px);line-height:1.08;letter-spacing:.01em}
+  h1 .thin{display:block;font-weight:300;font-size:.42em;letter-spacing:.06em;color:var(--paper-dim);margin-top:26px;font-family:var(--serif)}
+  .hero-sub{max-width:640px;margin-top:44px;font-size:17px;color:var(--paper-dim)}
+  .hero-sub strong{color:var(--paper);font-weight:600}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:56px;padding-top:28px;border-top:1px solid var(--line);font-size:13px;letter-spacing:.14em;color:var(--paper-faint)}
+  .hero-meta span b{color:var(--paper-dim);font-weight:500}
+
+  /* ---------- sections ---------- */
+  section{padding:110px 0;border-top:1px solid var(--line);position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:64px}
+  .sec-no{font-family:var(--serif);font-size:15px;color:var(--accent);letter-spacing:.2em}
+  .sec-title{font-family:var(--serif);font-size:clamp(30px,4.4vw,46px);font-weight:600;letter-spacing:.02em}
+  .sec-title small{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.3em;color:var(--paper-faint);margin-top:8px;text-transform:uppercase}
+
+  /* services */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:860px){.svc-grid{grid-template-columns:1fr}}
+  .svc{background:var(--ink-2);padding:44px 36px 52px;transition:background .3s}
+  .svc:hover{background:#17181c}
+  .svc .num{font-family:var(--serif);font-size:15px;color:var(--accent);letter-spacing:.16em}
+  .svc h3{font-size:21px;font-weight:600;margin:20px 0 6px;letter-spacing:.02em}
+  .svc .en{font-size:11px;letter-spacing:.26em;color:var(--paper-faint);text-transform:uppercase;margin-bottom:20px}
+  .svc p{font-size:14.5px;color:var(--paper-dim)}
+
+  /* works */
+  .work{display:grid;grid-template-columns:110px 1fr auto;gap:28px;padding:40px 0;border-bottom:1px solid var(--line);align-items:start}
+  .work:first-of-type{border-top:1px solid var(--line)}
+  @media(max-width:760px){.work{grid-template-columns:1fr;gap:10px}}
+  .work .yr{font-family:var(--serif);color:var(--paper-faint);font-size:15px;padding-top:6px;letter-spacing:.08em}
+  .work h3{font-size:23px;font-weight:600;letter-spacing:.01em}
+  .work h3 .en-name{font-family:var(--serif);font-weight:500;color:var(--paper-dim);font-size:17px;margin-left:10px}
+  .work p{margin-top:10px;font-size:14.5px;color:var(--paper-dim);max-width:640px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .tag{font-size:11px;letter-spacing:.14em;padding:4px 11px;border:1px solid var(--line);border-radius:99px;color:var(--paper-dim)}
+  .chip{font-size:11.5px;letter-spacing:.14em;padding:6px 13px;border-radius:99px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;margin-top:6px}
+  .chip.dev{background:rgba(236,231,221,.08);color:var(--paper-dim)}
+
+  /* writing */
+  .writing-lede{max-width:680px;font-size:16px;color:var(--paper-dim);margin-bottom:48px}
+  .post-row{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
+  .post-row:first-of-type{border-top:1px solid var(--line)}
+  .post-row .t{font-size:18px;font-weight:500}
+  .post-row .d{font-size:12.5px;color:var(--paper-faint);letter-spacing:.12em;white-space:nowrap}
+  .post-note{margin-top:22px;font-size:13px;color:var(--paper-faint)}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:70px}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px}}
+  .about-grid .big{font-family:var(--serif);font-size:clamp(23px,3vw,30px);line-height:1.65;font-weight:500}
+  .about-grid .big em{font-style:normal;color:var(--accent)}
+  .creed{border-left:2px solid var(--accent);padding-left:26px;color:var(--paper-dim);font-size:15px}
+  .creed p+p{margin-top:16px}
+
+  /* contact */
+  .contact-big{font-family:var(--serif);font-size:clamp(34px,5.6vw,62px);font-weight:600;line-height:1.3}
+  .contact-big em{font-style:normal;color:var(--accent)}
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:48px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border:1px solid var(--line);border-radius:99px;font-size:14px;letter-spacing:.1em;transition:all .25s}
+  .btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .btn.solid{background:var(--accent);color:var(--ink);border-color:var(--accent);font-weight:600}
+  .btn.solid:hover{background:#e0aa58;color:var(--ink)}
+
+  footer{padding:44px 0 54px;border-top:1px solid var(--line);font-size:12.5px;color:var(--paper-faint);letter-spacing:.12em}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">CROSS<em>DIY</em></a>
+    <div class="nav-links">
+      <a href="#services">服务</a>
+      <a href="#works">作品</a>
+      <a href="#writing">文章</a>
+      <a href="#about">关于</a>
+      <a href="#contact">联系</a>
+      <a href="/">EN</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="contours" aria-hidden="true">
+    <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" fill="none">
+      <path d="M-40 520 C 260 420, 420 640, 720 540 S 1180 380, 1500 480" stroke="rgba(210,154,74,.20)" stroke-width="1.2"/>
+      <path d="M-40 470 C 260 370, 430 590, 730 490 S 1190 330, 1500 430" stroke="rgba(236,231,221,.10)" stroke-width="1"/>
+      <path d="M-40 575 C 250 480, 410 690, 710 595 S 1170 440, 1500 535" stroke="rgba(236,231,221,.07)" stroke-width="1"/>
+      <path d="M-40 415 C 270 320, 440 535, 740 440 S 1200 285, 1500 380" stroke="rgba(210,154,74,.10)" stroke-width="1"/>
+      <path d="M-40 640 C 240 545, 400 745, 700 655 S 1160 505, 1500 600" stroke="rgba(236,231,221,.05)" stroke-width="1"/>
+      <circle cx="1085" cy="392" r="4" fill="rgba(210,154,74,.65)"/>
+      <circle cx="1085" cy="392" r="14" stroke="rgba(210,154,74,.35)" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-kicker">Roger Yan</div>
+    <h1>把想法，<br>做成实物。
+      <span class="thin">From idea to object — from scan to solid.</span>
+    </h1>
+    <p class="hero-sub">我是<strong>Roger</strong>，模具设计科班出身的工程师，本行是 <strong>Siemens NX 曲面建模与模具设计</strong>。我做三件事：把产品设计出来、把扫描数据逆向成可开模的实体、把脑子里的小产品真正做出来。</p>
+    <div class="hero-meta">
+      <span>所在地 <b>中国 · 远程协作</b></span>
+      <span>专长 <b>NX 曲面 / 逆向工程 / 模具设计</b></span>
+      <span>状态 <b>接受设计委托</b></span>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">01</div>
+      <h2 class="sec-title">服务<small>Services</small></h2>
+    </div>
+    <div class="svc-grid reveal">
+      <div class="svc">
+        <div class="num">/ 01</div>
+        <h3>NX 产品与模具设计</h3>
+        <div class="en">Product &amp; Mold Design</div>
+        <p>汽车内外饰、消费类产品的曲面建模与结构设计，Siemens NX 全流程：概念面、工程图、模具分型与开模可行性评估。</p>
+      </div>
+      <div class="svc">
+        <div class="num">/ 02</div>
+        <h3>逆向工程</h3>
+        <div class="en">Reverse Engineering</div>
+        <p>三维扫描数据（STL 网格）重建为可直接开模的 STEP 实体。外表面按 CAS 标准做到 G2 连续，每件交付附偏差质检报告。</p>
+      </div>
+      <div class="svc">
+        <div class="num">/ 03</div>
+        <h3>产品开发</h3>
+        <div class="en">Product Development</div>
+        <p>从概念、曲面、结构到样机的完整小产品开发。自有产品线（人体工学分体键盘）之外，也承接小批量产品的开发委托。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">02</div>
+      <h2 class="sec-title">作品与项目<small>Selected Works</small></h2>
+    </div>
+
+    <div class="work reveal">
+      <div class="yr">2026</div>
+      <div>
+        <h3>全自动逆向建模系统<span class="en-name">Auto Reverse-Mold</span></h3>
+        <p>上传 STL 扫描数据，后台自动重建出可开模的 STEP 实体。概念验证已跑通：87 万个三角面的扫描件被重建为合法 B 样条实体，外表面单张曲面天然 G2 连续，84% 的表面偏差控制在 0.3&nbsp;mm 以内，并自动生成质检偏差报告。</p>
+        <div class="tags"><span class="tag">REVERSE ENGINEERING</span><span class="tag">B-SPLINE</span><span class="tag">STEP AP242</span><span class="tag">G2 SURFACE</span></div>
+      </div>
+      <div class="chip">概念验证完成</div>
+    </div>
+
+    <div class="work reveal">
+      <div class="yr">2026</div>
+      <div>
+        <h3>人体工学分体曲面键盘<span class="en-name">Split Ergo Keyboard</span></h3>
+        <p>把 NX 曲面能力用在自己每天要用的东西上：贴合手型曲面的分体式键盘，从曲面造型、结构分件到样机验证，完整走一遍消费电子产品的开发流程。这是 CrossDIY 的产品主线。</p>
+        <div class="tags"><span class="tag">PRODUCT</span><span class="tag">ERGONOMICS</span><span class="tag">NX SURFACING</span></div>
+      </div>
+      <div class="chip dev">研发中</div>
+    </div>
+
+    <div class="work reveal">
+      <div class="yr">2026</div>
+      <div>
+        <h3>独立游戏两部<span class="en-name">Echoes of Myself · STEELCORE LINE</span></h3>
+        <p>《时影回声》——用自己的影子解谜的时间回响解谜游戏，10 个关卡；《钢核防线》——零件自拼装的 3D 塔防。均为 OpenGame Jam 参赛作品，从玩法、模型到上线独立完成。</p>
+        <div class="tags"><span class="tag">GAME</span><span class="tag">WEBGL</span><span class="tag">INDIE</span></div>
+      </div>
+      <div class="chip">已上线</div>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">03</div>
+      <h2 class="sec-title">文章<small>Writing</small></h2>
+    </div>
+    <p class="writing-lede reveal">「故障排查实录」系列：把真实折腾过的机器、系统和故障写成复盘——不写教程腔，只记当时怎么定位、怎么修好。系列共 8 篇，原载于开发者社区，正在陆续搬到这里。</p>
+    <div class="reveal">
+      <div class="post-row">
+        <div class="t">老笔记本退役了：不是它不够努力，是 4G 内存先到了头</div>
+        <div class="d">故障排查实录 · 08</div>
+      </div>
+      <p class="post-note">其余篇目搬运中，链接随后补上。</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">04</div>
+      <h2 class="sec-title">关于<small>About</small></h2>
+    </div>
+    <div class="about-grid reveal">
+      <p class="big">模具设计是我的科班，<em>把东西做出来</em>是我这些年一直在做的事——从 NX 里的曲面，到扫描件的逆向实体，再到键盘和游戏。</p>
+      <div class="creed">
+        <p>编程和产品开发都是业余自学入的行，所以我更相信实测而不是感觉：策略要回测、曲面要验偏差、结论要拿数据说话。</p>
+        <p>这个网站就是我的数字门牌。社交平台的内容由算法决定给谁看，这里由我自己决定放什么。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">05</div>
+      <h2 class="sec-title">联系<small>Contact</small></h2>
+    </div>
+    <p class="contact-big reveal">有产品要设计，<br>有扫描件要<em>逆向</em>？</p>
+    <div class="contact-row reveal">
+      <a class="btn solid" href="https://github.com/shidu110" target="_blank" rel="noopener">GitHub ↗</a>
+      <span class="btn">Upwork · 搜 Roger Yan</span>
+      <span class="btn">Fiverr · 搜 Roger Yan</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 ROGER YAN · CROSSDIY</span>
+    <span>DESIGNED &amp; BUILT BY HAND — NO TRACKERS</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
