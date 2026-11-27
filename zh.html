@@ -3,10 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roger Yan — 模具设计 · NX 曲面 · 逆向工程 | CrossDIY</title>
+<title>Roger Yan — NX 曲面、模具设计与逆向工程</title>
 <meta name="description" content="Roger Yan：模具设计与 Siemens NX 曲面工程师。NX 产品与模具设计、扫描数据逆向工程、产品开发。">
 <link rel="alternate" hreflang="en" href="https://me.crossdiy.com/">
 <link rel="alternate" hreflang="zh-CN" href="https://me.crossdiy.com/zh">
+<link rel="canonical" href="https://me.crossdiy.com/zh">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CrossDIY">
+<meta property="og:title" content="Roger Yan — NX 曲面、模具设计与逆向工程">
+<meta property="og:description" content="Roger Yan：模具设计与 Siemens NX 曲面工程师。NX 产品与模具设计、扫描数据逆向工程、产品开发。">
+<meta property="og:url" content="https://me.crossdiy.com/zh">
+<meta property="og:image" content="https://me.crossdiy.com/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0e10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230d0e10'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23d29a4a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "name": "Roger Yan", "url": "https://me.crossdiy.com/zh", "jobTitle": "Mold Design & Siemens NX Surfacing Engineer", "knowsLanguage": ["en", "zh-CN"], "address": {"@type": "PostalAddress", "addressCountry": "CN"}}, {"@type": "ProfessionalService", "name": "CrossDIY — Roger Yan", "url": "https://me.crossdiy.com/zh", "description": "Roger Yan：模具设计与 Siemens NX 曲面工程师。NX 产品与模具设计、扫描数据逆向工程、产品开发。", "areaServed": "Worldwide", "founder": {"@type": "Person", "name": "Roger Yan"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "报价需要我发什么？", "acceptedAnswer": {"@type": "Answer", "text": "零件文件（STEP、STL 或扫描数据）、图纸或照片、材料、目标数量和期望日期。产品未发布的话，可以先签 NDA。"}}, {"@type": "Question", "name": "我最终会拿到什么？", "acceptedAnswer": {"@type": "Answer", "text": "以书面范围为准——通常包括 NX 原生 .prt、STEP AP242 / 可转 Parasolid 的中性文件、工程图；逆向项目另附偏差质检报告。"}}, {"@type": "Question", "name": "可以签 NDA 吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。我愿意在 NDA 下工作，项目文件按保密处理。"}}, {"@type": "Question", "name": "设计成果和知识产权归谁？", "acceptedAnswer": {"@type": "Answer", "text": "归属和使用条款在开工前写进范围确认，双方确认后再动手，事后不扯皮。"}}, {"@type": "Question", "name": "修改怎么算？", "acceptedAnswer": {"@type": "Answer", "text": "包含的修改轮次会写在范围里。超出轮次或需求变更，先报价、确认后再做。"}}, {"@type": "Question", "name": "价格怎么定？", "acceptedAnswer": {"@type": "Answer", "text": "看完文件后给固定报价，范围、交付物和日期都书面确认。持续支持也可以按天预订。"}}, {"@type": "Question", "name": "能直接和我的模具厂对接吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。文件和 DFM 意见可直接与你的厂家沟通，中文或英文都行。"}}]}]}</script>
 <link rel="stylesheet" href="/fonts.css">
 <style>
   :root{
@@ -46,7 +59,7 @@
   .contours svg{width:100%;height:100%}
   .hero-kicker{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.34em;color:var(--accent);text-transform:uppercase;margin-bottom:34px}
   .hero-kicker::before{content:"";width:44px;height:1px;background:var(--accent)}
-  h1{font-family:var(--serif);font-weight:900;font-size:clamp(52px,9.2vw,118px);line-height:1.08;letter-spacing:.01em}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(52px,9.2vw,118px);line-height:1.08;letter-spacing:.01em}
   h1 .thin{display:block;font-weight:300;font-size:.42em;letter-spacing:.06em;color:var(--paper-dim);margin-top:26px;font-family:var(--serif)}
   .hero-sub{max-width:640px;margin-top:44px;font-size:17px;color:var(--paper-dim)}
   .hero-sub strong{color:var(--paper);font-weight:600}
@@ -111,12 +124,58 @@
   footer{padding:44px 0 54px;border-top:1px solid var(--line);font-size:12.5px;color:var(--paper-faint);letter-spacing:.12em}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--ink);padding:10px 18px;z-index:100;font-size:13px}
+  .skip:focus{left:12px;top:12px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+  @media(max-width:860px){.proof{grid-template-columns:repeat(2,1fr)}}
+  .proof div{background:var(--ink-2);padding:18px 20px;font-size:12.5px;letter-spacing:.08em;color:var(--paper-dim)}
+  .proof b{display:block;color:var(--paper);font-size:14.5px;letter-spacing:.03em;margin-bottom:2px}
+  .svc-list{list-style:none;margin-top:22px;border-top:1px solid var(--line)}
+  .svc-list li{font-size:13.5px;color:var(--paper-dim);padding:9px 0;border-bottom:1px solid var(--line)}
+  .svc-list b{color:var(--accent);font-weight:600;letter-spacing:.08em;margin-right:8px;font-size:11.5px;text-transform:uppercase}
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+  @media(max-width:860px){.ladder{grid-template-columns:1fr}}
+  .ladder>div{border-top:2px solid var(--accent);padding-top:16px}
+  .ladder h4{font-size:16px;font-weight:600}
+  .ladder h4 span{font-family:var(--serif);color:var(--accent);margin-right:10px;font-size:14px}
+  .ladder p{font-size:13.5px;color:var(--paper-dim);margin-top:6px}
+  .case-facts{margin-top:16px;display:grid;gap:6px;font-size:13.5px;color:var(--paper-dim)}
+  .case-facts b{color:var(--paper);font-weight:600;margin-right:8px}
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:26px}
+  @media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.steps{grid-template-columns:1fr}}
+  .step .num{font-family:var(--serif);color:var(--accent);font-size:15px;letter-spacing:.16em}
+  .step h4{font-size:16.5px;font-weight:600;margin:12px 0 6px}
+  .step p{font-size:13.5px;color:var(--paper-dim)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq details:first-of-type{border-top:1px solid var(--line)}
+  .faq summary{cursor:pointer;padding:22px 0;font-size:16.5px;font-weight:500;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";float:right;color:var(--accent)}
+  .faq details[open] summary::after{content:"\2013"}
+  .faq details p{padding:0 0 22px;font-size:14.5px;color:var(--paper-dim);max-width:780px}
+  .stack-line{font-size:13px!important;letter-spacing:.08em;color:var(--paper-faint)!important}
+  .stack-line b{color:var(--paper-dim);font-weight:500}
+  .mobile-cta{display:none}
+  @media(max-width:760px){
+    body{padding-bottom:66px}
+    .mobile-cta{display:block;position:fixed;left:16px;right:16px;bottom:14px;z-index:60;background:var(--accent);color:var(--ink);text-align:center;padding:13px 20px;border-radius:99px;font-weight:600;font-size:14.5px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+    .nav-links{gap:16px;font-size:11.5px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
+  }
+
   .reveal{opacity:1;transform:none}
   html.jsr .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
   html.jsr .reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
+<a class="skip" href="#content">跳到正文</a>
 
 <nav>
   <div class="wrap">
@@ -124,14 +183,16 @@
     <div class="nav-links">
       <a href="#services">服务</a>
       <a href="#works">作品</a>
-      <a href="#writing">文章</a>
+      <a href="#process">流程</a>
       <a href="#about">关于</a>
+      <a href="#faq">问答</a>
       <a href="#contact">联系</a>
       <a href="/">EN</a>
     </div>
   </div>
 </nav>
 
+<main id="content">
 <header id="top">
   <div class="contours" aria-hidden="true">
     <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" fill="none">
@@ -150,11 +211,13 @@
       <span class="thin">From idea to object — from scan to solid.</span>
     </h1>
     <p class="hero-sub">我是<strong>Roger</strong>，模具设计科班出身的工程师，本行是 <strong>Siemens NX 曲面建模与模具设计</strong>。我做三件事：把产品设计出来、把扫描数据逆向成可开模的实体、把脑子里的小产品真正做出来。</p>
+    <div class="cta-row"><a class="btn solid" href="#contact">开始一个项目</a><a class="btn" href="#works">查看作品</a></div>
     <div class="hero-meta">
       <span>所在地 <b>中国 · 远程协作</b></span>
       <span>专长 <b>NX 曲面 / 逆向工程 / 模具设计</b></span>
       <span>状态 <b>接受设计委托</b></span>
     </div>
+    <div class="proof reveal"><div><b>科班背景</b>模具设计</div><div><b>交付物</b>NX .prt · STEP AP242 · 工程图</div><div><b>曲面标准</b>外表面 G2 连续</div><div><b>工作语言</b>中文 · English（UTC+8）</div></div>
   </div>
 </header>
 
@@ -170,20 +233,24 @@
         <h3>NX 产品与模具设计</h3>
         <div class="en">Product &amp; Mold Design</div>
         <p>汽车内外饰、消费类产品的曲面建模与结构设计，Siemens NX 全流程：概念面、工程图、模具分型与开模可行性评估。</p>
+        <ul class="svc-list"><li><b>你发来</b>草图、参考图、现有 CAD 或实物样品。</li><li><b>交付</b>NX 原生 .prt、STEP AP242、工程图、分型与可制造性说明。</li><li><b>结果</b>拔模、壁厚、分型在开模前查清，不等模具厂退回才发现。</li></ul>
       </div>
       <div class="svc">
         <div class="num">/ 02</div>
         <h3>逆向工程</h3>
         <div class="en">Reverse Engineering</div>
         <p>三维扫描数据（STL 网格）重建为可直接开模的 STEP 实体。外表面按 CAS 标准做到 G2 连续，每件交付附偏差质检报告。</p>
+        <ul class="svc-list"><li><b>你发来</b>STL/PLY 扫描数据、零件用途、必须保留的关键尺寸。</li><li><b>交付</b>可开模的 STEP AP242 实体 + 偏差质检报告。</li><li><b>结果</b>外表面按 CAS 标准 G2 连续，可直接进入后续模具设计。</li></ul>
       </div>
       <div class="svc">
         <div class="num">/ 03</div>
         <h3>产品开发</h3>
         <div class="en">Product Development</div>
         <p>从概念、曲面、结构到样机的完整小产品开发。自有产品线（人体工学分体键盘）之外，也承接小批量产品的开发委托。</p>
+        <ul class="svc-list"><li><b>你发来</b>一页简报：想法、约束、目标数量与成本区间（如有）。</li><li><b>交付</b>概念曲面、结构、样机级 CAD 与迭代支持。</li><li><b>结果</b>从第一张草图到实物样机，一条线负责到底。</li></ul>
       </div>
     </div>
+<div class="ladder reveal"><div><h4><span>01</span>可行性 / DFM 评审</h4><p>先发文件。你会拿到书面结论：什么能做、什么不能做、需要多少投入——再决定要不要立项。</p></div><div><h4><span>02</span>固定范围项目</h4><p>看完文件后，范围、交付物、价格和日期都写进书面确认，不开无底洞的按时计费。</p></div><div><h4><span>03</span>持续支持</h4><p>与你的产品团队或模具厂配合迭代：设计变更、DFM 轮次和开模跟进，按天预订。</p></div></div>
   </div>
 </section>
 
@@ -199,6 +266,7 @@
       <div>
         <h3>全自动逆向建模系统<span class="en-name">Auto Reverse-Mold</span></h3>
         <p>上传 STL 扫描数据，后台自动重建出可开模的 STEP 实体。概念验证已跑通：87 万个三角面的扫描件被重建为合法 B 样条实体，外表面单张曲面天然 G2 连续，84% 的表面偏差控制在 0.3&nbsp;mm 以内，并自动生成质检偏差报告。</p>
+        <div class="case-facts"><span><b>约束</b>87 万三角面扫描件，没有原始 CAD。</span><span><b>做法</b>样条原生重建，外表面单张曲面、构造上天然 G2。</span><span><b>结果</b>合法实体 + 质检报告，84% 偏差在 0.3 mm 内。</span></div>
         <div class="tags"><span class="tag">REVERSE ENGINEERING</span><span class="tag">B-SPLINE</span><span class="tag">STEP AP242</span><span class="tag">G2 SURFACE</span></div>
       </div>
       <div class="chip">概念验证完成</div>
@@ -209,6 +277,7 @@
       <div>
         <h3>人体工学分体曲面键盘<span class="en-name">Split Ergo Keyboard</span></h3>
         <p>把 NX 曲面能力用在自己每天要用的东西上：贴合手型曲面的分体式键盘，从曲面造型、结构分件到样机验证，完整走一遍消费电子产品的开发流程。这是 CrossDIY 的产品主线。</p>
+        <div class="case-facts"><span><b>重点</b>贴合手型的曲面造型、结构分件与样机验证，全程 NX。</span><span><b>状态</b>CrossDIY 产品主线，研发中。</span></div>
         <div class="tags"><span class="tag">PRODUCT</span><span class="tag">ERGONOMICS</span><span class="tag">NX SURFACING</span></div>
       </div>
       <div class="chip dev">研发中</div>
@@ -219,6 +288,7 @@
       <div>
         <h3>独立游戏两部<span class="en-name">Echoes of Myself · STEELCORE LINE</span></h3>
         <p>《时影回声》——用自己的影子解谜的时间回响解谜游戏，10 个关卡；《钢核防线》——零件自拼装的 3D 塔防。均为 OpenGame Jam 参赛作品，从玩法、模型到上线独立完成。</p>
+        <div class="case-facts"><span><b>范围</b>玩法设计、3D 建模、上线发布，一人完成。</span><span><b>结果</b>两部 OpenGame Jam 参赛作品，已上线可玩。</span></div>
         <div class="tags"><span class="tag">GAME</span><span class="tag">WEBGL</span><span class="tag">INDIE</span></div>
       </div>
       <div class="chip">已上线</div>
@@ -226,10 +296,26 @@
   </div>
 </section>
 
-<section id="writing">
+<section id="process">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-no">03</div>
+      <h2 class="sec-title">合作流程<small>Process</small></h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="num">/ 01</div><h4>发送文件</h4><p>STEP 或 STL/扫描数据、图纸、照片和约束条件。需要的话先签 NDA。</p></div>
+      <div class="step"><div class="num">/ 02</div><h4>书面范围</h4><p>交付物、固定价格和交付日期在开工前书面确认。</p></div>
+      <div class="step"><div class="num">/ 03</div><h4>CAD 初稿</h4><p>第一版曲面/模具初稿附截图发出，供你评审提意见。</p></div>
+      <div class="step"><div class="num">/ 04</div><h4>修改确认</h4><p>约定轮次内的修改包含在内；新增需求先报价再动手。</p></div>
+      <div class="step"><div class="num">/ 05</div><h4>交付归档</h4><p>NX 原生文件 + 中性格式、工程图和简要变更记录——可直接交给模具厂。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">04</div>
       <h2 class="sec-title">文章<small>Writing</small></h2>
     </div>
     <p class="writing-lede reveal">「故障排查实录」系列：把真实折腾过的机器、系统和故障写成复盘——不写教程腔，只记当时怎么定位、怎么修好。系列共 8 篇，原载于开发者社区，正在陆续搬到这里。</p>
@@ -246,7 +332,7 @@
 <section id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-no">04</div>
+      <div class="sec-no">05</div>
       <h2 class="sec-title">关于<small>About</small></h2>
     </div>
     <div class="about-grid reveal">
@@ -254,7 +340,20 @@
       <div class="creed">
         <p>编程和产品开发都是业余自学入的行，所以我更相信实测而不是感觉：策略要回测、曲面要验偏差、结论要拿数据说话。</p>
         <p>这个网站就是我的数字门牌。社交平台的内容由算法决定给谁看，这里由我自己决定放什么。</p>
+        <p class="stack-line"><b>工具栈</b> &nbsp;Siemens NX · STEP AP242 · 中文 / English · 中国（UTC+8）</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">06</div>
+      <h2 class="sec-title">常见问题<small>FAQ</small></h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>报价需要我发什么？</summary><p>零件文件（STEP、STL 或扫描数据）、图纸或照片、材料、目标数量和期望日期。产品未发布的话，可以先签 NDA。</p></details><details><summary>我最终会拿到什么？</summary><p>以书面范围为准——通常包括 NX 原生 .prt、STEP AP242 / 可转 Parasolid 的中性文件、工程图；逆向项目另附偏差质检报告。</p></details><details><summary>可以签 NDA 吗？</summary><p>可以。我愿意在 NDA 下工作，项目文件按保密处理。</p></details><details><summary>设计成果和知识产权归谁？</summary><p>归属和使用条款在开工前写进范围确认，双方确认后再动手，事后不扯皮。</p></details><details><summary>修改怎么算？</summary><p>包含的修改轮次会写在范围里。超出轮次或需求变更，先报价、确认后再做。</p></details><details><summary>价格怎么定？</summary><p>看完文件后给固定报价，范围、交付物和日期都书面确认。持续支持也可以按天预订。</p></details><details><summary>能直接和我的模具厂对接吗？</summary><p>可以。文件和 DFM 意见可直接与你的厂家沟通，中文或英文都行。</p></details>
     </div>
   </div>
 </section>
@@ -262,10 +361,11 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-no">05</div>
+      <div class="sec-no">07</div>
       <h2 class="sec-title">联系<small>Contact</small></h2>
     </div>
     <p class="contact-big reveal">有产品要设计，<br>有扫描件要<em>逆向</em>？</p>
+    <p class="writing-lede reveal">想最快拿到报价，请发来零件文件或扫描数据、材料、目标数量和期望日期——需要的话先签 NDA。</p>
     <div class="contact-row reveal">
       <a class="btn solid" href="https://github.com/shidu110" target="_blank" rel="noopener">GitHub ↗</a>
       <span class="btn">Upwork · 搜 Roger Yan</span>
@@ -274,6 +374,8 @@
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap">
     <span>© 2026 ROGER YAN · CROSSDIY</span>
@@ -281,10 +383,14 @@
   </div>
 </footer>
 
+<a class="mobile-cta" href="#contact">开始一个项目</a>
+
 <script>
   document.documentElement.classList.add('jsr');
   const revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(es => {
       es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: .12 });
