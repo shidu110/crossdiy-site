@@ -3,10 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roger Yan — Mold Design · NX Surfacing · Reverse Engineering | CrossDIY</title>
+<title>Roger Yan — Siemens NX Surfacing & Mold Design</title>
 <meta name="description" content="Roger Yan: mold design and Siemens NX surfacing engineer. NX product and mold design, reverse engineering from scan data, product development.">
 <link rel="alternate" hreflang="en" href="https://me.crossdiy.com/">
 <link rel="alternate" hreflang="zh-CN" href="https://me.crossdiy.com/zh">
+<link rel="canonical" href="https://me.crossdiy.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CrossDIY">
+<meta property="og:title" content="Roger Yan — Siemens NX Surfacing & Mold Design">
+<meta property="og:description" content="Roger Yan: mold design and Siemens NX surfacing engineer. NX product and mold design, reverse engineering from scan data, product development.">
+<meta property="og:url" content="https://me.crossdiy.com/">
+<meta property="og:image" content="https://me.crossdiy.com/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0e10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230d0e10'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' fill='%23d29a4a' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "name": "Roger Yan", "url": "https://me.crossdiy.com/", "jobTitle": "Mold Design & Siemens NX Surfacing Engineer", "knowsLanguage": ["en", "zh-CN"], "address": {"@type": "PostalAddress", "addressCountry": "CN"}}, {"@type": "ProfessionalService", "name": "CrossDIY — Roger Yan", "url": "https://me.crossdiy.com/", "description": "Roger Yan: mold design and Siemens NX surfacing engineer. NX product and mold design, reverse engineering from scan data, product development.", "areaServed": "Worldwide", "founder": {"@type": "Person", "name": "Roger Yan"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What should I send for a quote?", "acceptedAnswer": {"@type": "Answer", "text": "Your part files (STEP, STL or scan data), drawings or photos, the material, target quantity and deadline. If the product is unreleased, ask for an NDA first."}}, {"@type": "Question", "name": "What exactly will I receive?", "acceptedAnswer": {"@type": "Answer", "text": "Whatever the written scope lists — typically native NX .prt files, STEP AP242 / Parasolid-ready neutral files, 2D drawings, and for reverse-engineering work a deviation inspection report."}}, {"@type": "Question", "name": "Can you sign an NDA?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. I am happy to work under an NDA, and project files are treated as confidential."}}, {"@type": "Question", "name": "Who owns the design and the IP?", "acceptedAnswer": {"@type": "Answer", "text": "Ownership and usage terms are agreed in writing in the scope, before work starts — no surprises afterwards."}}, {"@type": "Question", "name": "How are revisions handled?", "acceptedAnswer": {"@type": "Answer", "text": "The number of included revision rounds is stated in the scope. Anything beyond that, or a change of requirements, is quoted before the extra work begins."}}, {"@type": "Question", "name": "How is the price set?", "acceptedAnswer": {"@type": "Answer", "text": "A fixed quote after I have reviewed your files — scope, deliverables and date are confirmed in writing. Ongoing support can be booked by the day instead."}}, {"@type": "Question", "name": "Can you work directly with my mold shop?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. I can exchange files and DFM comments directly with your manufacturer, in English or Chinese."}}]}]}</script>
 <link rel="stylesheet" href="/fonts.css">
 <style>
   :root{
@@ -46,7 +59,7 @@
   .contours svg{width:100%;height:100%}
   .hero-kicker{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.34em;color:var(--accent);text-transform:uppercase;margin-bottom:34px}
   .hero-kicker::before{content:"";width:44px;height:1px;background:var(--accent)}
-  h1{font-family:var(--serif);font-weight:900;font-size:clamp(52px,9.2vw,118px);line-height:1.08;letter-spacing:.01em}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(52px,9.2vw,118px);line-height:1.08;letter-spacing:.01em}
   h1 .thin{display:block;font-weight:300;font-size:.42em;letter-spacing:.06em;color:var(--paper-dim);margin-top:26px;font-family:var(--serif)}
   .hero-sub{max-width:640px;margin-top:44px;font-size:17px;color:var(--paper-dim)}
   .hero-sub strong{color:var(--paper);font-weight:600}
@@ -111,12 +124,58 @@
   footer{padding:44px 0 54px;border-top:1px solid var(--line);font-size:12.5px;color:var(--paper-faint);letter-spacing:.12em}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--ink);padding:10px 18px;z-index:100;font-size:13px}
+  .skip:focus{left:12px;top:12px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+  @media(max-width:860px){.proof{grid-template-columns:repeat(2,1fr)}}
+  .proof div{background:var(--ink-2);padding:18px 20px;font-size:12.5px;letter-spacing:.08em;color:var(--paper-dim)}
+  .proof b{display:block;color:var(--paper);font-size:14.5px;letter-spacing:.03em;margin-bottom:2px}
+  .svc-list{list-style:none;margin-top:22px;border-top:1px solid var(--line)}
+  .svc-list li{font-size:13.5px;color:var(--paper-dim);padding:9px 0;border-bottom:1px solid var(--line)}
+  .svc-list b{color:var(--accent);font-weight:600;letter-spacing:.08em;margin-right:8px;font-size:11.5px;text-transform:uppercase}
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+  @media(max-width:860px){.ladder{grid-template-columns:1fr}}
+  .ladder>div{border-top:2px solid var(--accent);padding-top:16px}
+  .ladder h4{font-size:16px;font-weight:600}
+  .ladder h4 span{font-family:var(--serif);color:var(--accent);margin-right:10px;font-size:14px}
+  .ladder p{font-size:13.5px;color:var(--paper-dim);margin-top:6px}
+  .case-facts{margin-top:16px;display:grid;gap:6px;font-size:13.5px;color:var(--paper-dim)}
+  .case-facts b{color:var(--paper);font-weight:600;margin-right:8px}
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:26px}
+  @media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.steps{grid-template-columns:1fr}}
+  .step .num{font-family:var(--serif);color:var(--accent);font-size:15px;letter-spacing:.16em}
+  .step h4{font-size:16.5px;font-weight:600;margin:12px 0 6px}
+  .step p{font-size:13.5px;color:var(--paper-dim)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq details:first-of-type{border-top:1px solid var(--line)}
+  .faq summary{cursor:pointer;padding:22px 0;font-size:16.5px;font-weight:500;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";float:right;color:var(--accent)}
+  .faq details[open] summary::after{content:"\2013"}
+  .faq details p{padding:0 0 22px;font-size:14.5px;color:var(--paper-dim);max-width:780px}
+  .stack-line{font-size:13px!important;letter-spacing:.08em;color:var(--paper-faint)!important}
+  .stack-line b{color:var(--paper-dim);font-weight:500}
+  .mobile-cta{display:none}
+  @media(max-width:760px){
+    body{padding-bottom:66px}
+    .mobile-cta{display:block;position:fixed;left:16px;right:16px;bottom:14px;z-index:60;background:var(--accent);color:var(--ink);text-align:center;padding:13px 20px;border-radius:99px;font-weight:600;font-size:14.5px;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+    .nav-links{gap:16px;font-size:11.5px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
+  }
+
   .reveal{opacity:1;transform:none}
   html.jsr .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
   html.jsr .reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
 
 <nav>
   <div class="wrap">
@@ -124,14 +183,16 @@
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#works">Works</a>
-      <a href="#writing">Writing</a>
+      <a href="#process">Process</a>
       <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
       <a href="/zh">中文</a>
     </div>
   </div>
 </nav>
 
+<main id="content">
 <header id="top">
   <div class="contours" aria-hidden="true">
     <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" fill="none">
@@ -150,11 +211,13 @@
       <span class="thin">From idea to object — from scan to solid.</span>
     </h1>
     <p class="hero-sub">I'm <strong>Roger</strong>, a formally trained mold design engineer specialising in <strong>Siemens NX surfacing and mold design</strong>. I do three things: design products, reverse-engineer scan data into mold-ready solids, and actually build the small products I dream up.</p>
+    <div class="cta-row"><a class="btn solid" href="#contact">Start a project</a><a class="btn" href="#works">See selected work</a></div>
     <div class="hero-meta">
       <span>Based in <b>China · Working remotely worldwide</b></span>
       <span>Expertise <b>NX Surfacing / Reverse Engineering / Mold Design</b></span>
       <span>Status <b>Available for design commissions</b></span>
     </div>
+    <div class="proof reveal"><div><b>Formal training</b>Mold design, by trade</div><div><b>Deliverables</b>NX .prt · STEP AP242 · Drawings</div><div><b>Surface standard</b>G2-continuous outer surfaces</div><div><b>Working languages</b>English · 中文 (UTC+8)</div></div>
   </div>
 </header>
 
@@ -170,20 +233,24 @@
         <h3>NX Product &amp; Mold Design</h3>
         <div class="en">Product &amp; Mold Design</div>
         <p>Surfacing and structural design for automotive interior/exterior trim and consumer products — the full Siemens NX workflow: concept surfaces, engineering drawings, mold parting and manufacturability assessment.</p>
+        <ul class="svc-list"><li><b>Send</b>Sketches, references, existing CAD or a physical sample.</li><li><b>Deliverables</b>Native NX .prt, STEP AP242, 2D drawings, parting & DFM notes.</li><li><b>Outcome</b>Draft, wall thickness and parting checked before tooling — not after the mold shop complains.</li></ul>
       </div>
       <div class="svc">
         <div class="num">/ 02</div>
         <h3>Reverse Engineering</h3>
         <div class="en">Reverse Engineering</div>
         <p>Rebuilding 3D scan data (STL meshes) into mold-ready STEP solids. Outer surfaces are built to CAS standard with G2 continuity, and every delivery includes a deviation inspection report.</p>
+        <ul class="svc-list"><li><b>Send</b>STL/PLY scan data, the part's intended use, and any must-keep dimensions.</li><li><b>Deliverables</b>Mold-ready STEP AP242 solid plus a deviation inspection report.</li><li><b>Outcome</b>CAS-grade outer surfaces with G2 continuity, ready for downstream mold design.</li></ul>
       </div>
       <div class="svc">
         <div class="num">/ 03</div>
         <h3>Product Development</h3>
         <div class="en">Product Development</div>
         <p>Complete small-product development — concept, surfacing, structure, prototype. Alongside my own product line (ergonomic split keyboards), I take on small-batch product development commissions.</p>
+        <ul class="svc-list"><li><b>Send</b>A short brief: the idea, constraints, target quantity and cost range if known.</li><li><b>Deliverables</b>Concept surfaces, structure, prototype-ready CAD and iteration support.</li><li><b>Outcome</b>One accountable path from first sketch to a physical prototype.</li></ul>
       </div>
     </div>
+<div class="ladder reveal"><div><h4><span>01</span>Feasibility / DFM review</h4><p>Send your files first. You get a written assessment of what is manufacturable, what is not, and what it will take — before committing to a full project.</p></div><div><h4><span>02</span>Fixed-scope project</h4><p>Scope, deliverables, price and date are confirmed in writing after the file review. No open-ended hourly meter.</p></div><div><h4><span>03</span>Ongoing support</h4><p>Iterations with your product team or mold shop: design changes, DFM rounds and tooling follow-up, booked in days.</p></div></div>
   </div>
 </section>
 
@@ -199,6 +266,7 @@
       <div>
         <h3>Automated Reverse-Engineering System</h3>
         <p>Upload STL scan data and the system automatically rebuilds a mold-ready STEP solid. Proof of concept complete: a scan of 870,000 triangles was rebuilt into a valid B-spline solid — the outer surface G2-continuous by construction on a single patch, 84% of surface deviation within 0.3&nbsp;mm, with an automatically generated inspection report.</p>
+        <div class="case-facts"><span><b>Constraint</b>870k-triangle scan, no original CAD.</span><span><b>Approach</b>Native B-spline reconstruction; the outer surface is a single patch, G2 by construction.</span><span><b>Result</b>Valid solid delivered with inspection report — 84% of deviation within 0.3 mm.</span></div>
         <div class="tags"><span class="tag">REVERSE ENGINEERING</span><span class="tag">B-SPLINE</span><span class="tag">STEP AP242</span><span class="tag">G2 SURFACE</span></div>
       </div>
       <div class="chip">Proof of concept complete</div>
@@ -209,6 +277,7 @@
       <div>
         <h3>Ergonomic Split Curved Keyboard</h3>
         <p>Putting NX surfacing to work on something I use every day: a split keyboard shaped to the hand — surface styling, structural parting, prototype validation, the full consumer-electronics development cycle. This is CrossDIY's main product line.</p>
+        <div class="case-facts"><span><b>Focus</b>Hand-shaped surfacing, structural parting and prototype validation in NX.</span><span><b>Status</b>Main CrossDIY product line — in development.</span></div>
         <div class="tags"><span class="tag">PRODUCT</span><span class="tag">ERGONOMICS</span><span class="tag">NX SURFACING</span></div>
       </div>
       <div class="chip dev">In development</div>
@@ -219,6 +288,7 @@
       <div>
         <h3>Two Indie Games<span class="en-name">Echoes of Myself · STEELCORE LINE</span></h3>
         <p><i>Echoes of Myself</i> — a time-echo puzzle game where you solve levels with your own shadows, 10 levels; <i>STEELCORE LINE</i> — a 3D tower defence with self-assembling parts. Both are OpenGame Jam entries, designed, modelled and shipped independently.</p>
+        <div class="case-facts"><span><b>Scope</b>Game design, 3D modelling and build — solo, end to end.</span><span><b>Result</b>Two OpenGame Jam entries, live and playable.</span></div>
         <div class="tags"><span class="tag">GAME</span><span class="tag">WEBGL</span><span class="tag">INDIE</span></div>
       </div>
       <div class="chip">Live now</div>
@@ -226,10 +296,26 @@
   </div>
 </section>
 
-<section id="writing">
+<section id="process">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-no">03</div>
+      <h2 class="sec-title">How It Works<small>Process</small></h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="num">/ 01</div><h4>Send files</h4><p>STEP or STL/scan data, drawings, photos and constraints. NDA first if you need one.</p></div>
+      <div class="step"><div class="num">/ 02</div><h4>Written scope</h4><p>Deliverables, fixed price and delivery date confirmed in writing before any work starts.</p></div>
+      <div class="step"><div class="num">/ 03</div><h4>CAD draft</h4><p>First surfaces / mold draft shared with screenshots for your review and comments.</p></div>
+      <div class="step"><div class="num">/ 04</div><h4>Revisions</h4><p>The agreed revision rounds are included; new requirements are quoted before extra work begins.</p></div>
+      <div class="step"><div class="num">/ 05</div><h4>Handover</h4><p>Native NX + neutral files, drawings and a short change log — ready for your mold shop.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">04</div>
       <h2 class="sec-title">Writing<small>Notes &amp; Articles</small></h2>
     </div>
     <p class="writing-lede reveal">The <i>Field Notes on Failures</i> series: honest post-mortems of real machines, systems and breakdowns I have wrestled with — no tutorial voice, just how each problem was found and fixed. Eight posts, originally published in Chinese on a developer community, now being moved here.</p>
@@ -246,7 +332,7 @@
 <section id="about">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-no">04</div>
+      <div class="sec-no">05</div>
       <h2 class="sec-title">About<small>Profile</small></h2>
     </div>
     <div class="about-grid reveal">
@@ -254,7 +340,20 @@
       <div class="creed">
         <p>Programming and product development are self-taught, which is why I trust measurement over intuition: strategies get backtested, surfaces get deviation-checked, conclusions need data.</p>
         <p>This site is my own digital front door. On social platforms an algorithm decides who sees what; here, I decide.</p>
+        <p class="stack-line"><b>Stack</b> &nbsp;Siemens NX · STEP AP242 · English / 中文 · China (UTC+8)</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">06</div>
+      <h2 class="sec-title">Questions<small>FAQ</small></h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary>What should I send for a quote?</summary><p>Your part files (STEP, STL or scan data), drawings or photos, the material, target quantity and deadline. If the product is unreleased, ask for an NDA first.</p></details><details><summary>What exactly will I receive?</summary><p>Whatever the written scope lists — typically native NX .prt files, STEP AP242 / Parasolid-ready neutral files, 2D drawings, and for reverse-engineering work a deviation inspection report.</p></details><details><summary>Can you sign an NDA?</summary><p>Yes. I am happy to work under an NDA, and project files are treated as confidential.</p></details><details><summary>Who owns the design and the IP?</summary><p>Ownership and usage terms are agreed in writing in the scope, before work starts — no surprises afterwards.</p></details><details><summary>How are revisions handled?</summary><p>The number of included revision rounds is stated in the scope. Anything beyond that, or a change of requirements, is quoted before the extra work begins.</p></details><details><summary>How is the price set?</summary><p>A fixed quote after I have reviewed your files — scope, deliverables and date are confirmed in writing. Ongoing support can be booked by the day instead.</p></details><details><summary>Can you work directly with my mold shop?</summary><p>Yes. I can exchange files and DFM comments directly with your manufacturer, in English or Chinese.</p></details>
     </div>
   </div>
 </section>
@@ -262,10 +361,11 @@
 <section id="contact">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-no">05</div>
+      <div class="sec-no">07</div>
       <h2 class="sec-title">Contact<small>Get in Touch</small></h2>
     </div>
     <p class="contact-big reveal">Have a product to design,<br>or a scan to <em>reverse-engineer</em>?</p>
+    <p class="writing-lede reveal">For the fastest quote, send your part files or scan, the material, target quantity and date — NDA first if you need one.</p>
     <div class="contact-row reveal">
       <a class="btn solid" href="https://github.com/shidu110" target="_blank" rel="noopener">GitHub ↗</a>
       <span class="btn">Upwork · Find Roger Yan</span>
@@ -274,6 +374,8 @@
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap">
     <span>© 2026 ROGER YAN · CROSSDIY</span>
@@ -281,10 +383,14 @@
   </div>
 </footer>
 
+<a class="mobile-cta" href="#contact">Start a project</a>
+
 <script>
   document.documentElement.classList.add('jsr');
   const revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(es => {
       es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: .12 });
